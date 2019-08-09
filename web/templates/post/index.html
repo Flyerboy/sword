@@ -1,0 +1,70 @@
+{{ define "content" }}
+
+<div class="row">
+    <div class="col-sm-9">
+        <ul class="list-group post-list">
+        {{ range $k, $post := .posts }}
+            <li class="list-group-item">
+                <a href="/posts/{{ $post.Id }}">
+                    <div class="col-md-9 float-left">
+                        {{ if $post.IsTop }}
+                        <span class="badge badge-danger">置顶</span>
+                        {{ end }}
+                        <span class="badge badge-info">热门</span>
+                    {{ $post.Title }}
+                    </div>
+                    <div class="col-md-3 float-right text-right post-attr">
+                        <i class="fa fa-thumbs-o-up"></i> {{ $post.ReadNumber }}
+                        <span>/</span>
+                        <i class="fa fa-comments"></i> {{ $post.ReadNumber }}
+                        <span>/</span>
+                        5分钟前
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+        {{ end }}
+        </ul>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+    <div class="col-sm-3">
+        <div class="card">
+            <img class="card-img-top" src="/asset/image/1.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ end }}

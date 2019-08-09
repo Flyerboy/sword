@@ -1,0 +1,86 @@
+{{ define "content" }}
+
+<div class="row">
+    <div class="col-sm-9">
+        <div class=" post-detail">
+            <h4>{{ .post.Title }}</h4>
+            <div class="post-attr">
+                <span>阅读数：1</span>
+                <span>评论数：2</span>
+                <span>发布时间：3天前</span>
+            </div>
+            <div class="post-content">
+                {{ .content }}
+                <i class="fa fa-tags"></i></i> <a href="#" class="badge badge-warning">Warning</a>
+            </div>
+        </div>
+
+        <div class="prise bg-danger">赞</div>
+
+        <div class="post-comment">
+            <div class="post-comment-title">5条评论</div>
+            <div class="media post-comment-list">
+                <a class="pr-3" href="#">
+                    <img src="/asset/image/1.jpg" alt="Generic placeholder image">
+                </a>
+                <div class="media-body">
+                    <div class="mt-0">Media heading . 4分钟前</div>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+                    <div class="media mt-3">
+                        <a class="pr-3" href="#">
+                            <img src="/asset/image/1.jpg" alt="Generic placeholder image">
+                        </a>
+                        <div class="media-body">
+                            <div class="mt-0">Media heading . 4分钟前</div>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        </div>
+                    </div>
+
+                    <div class="media mt-3">
+                        <a class="pr-3" href="#">
+                            <img src="/asset/image/1.jpg" alt="Generic placeholder image">
+                        </a>
+                        <div class="media-body">
+                            <div class="mt-0">Media heading . 4分钟前</div>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <form>
+                    <div class="form-group">
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card">
+            <img class="card-img-top" src="/asset/image/1.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+{{ end }}

@@ -1,0 +1,14 @@
+database:
+  host: 127.0.0.1
+  user: root
+  password: root
+  port: 3306
+  db: discuss
+
+api:
+  port: 8080
+
+web:
+  port: 8888
+
+

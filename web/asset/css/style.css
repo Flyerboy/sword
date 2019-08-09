@@ -1,0 +1,76 @@
+.login{
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+.my-navbar{
+    background-color: #ffffff !important;
+    padding: 10px 0;
+}
+.main{
+    background-color: #efefef;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.post-list{
+    margin-bottom: 20px;
+}
+
+.post-list .post-attr{
+    color: #aaaaaa;
+}
+.post-list .float-left,
+.post-list .float-right{
+    padding: 0;
+}
+
+/*post detail*/
+.post-detail{
+    background-color: #ffffff;
+    padding: 20px;
+}
+.post-detail .post-attr{
+    color: #aaaaaa;
+    border-bottom: 1px solid #dddddd;
+    padding: 5px 0 10px 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.post-detail .post-attr span{
+    margin-right: 10px;
+}
+
+.post-comment{
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+}
+.post-comment-title{
+    font-size: 22px;
+    font-weight: bold;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 20px;
+}
+.post-comment-list{
+    margin-bottom: 20px;
+}
+
+.post-comment .media img{
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+}
+
+.prise{
+    margin: 20px auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    line-height: 50px;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
