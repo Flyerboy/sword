@@ -7,11 +7,13 @@ import (
 )
 
 func Index(c *gin.Context)  {
-	posts, _ := service.GetPosts(0, 10)
-	categories, _ := service.GetCategories(0, 10)
-	c.HTML(http.StatusOK, "index/index.html", gin.H{
-		"posts": posts,
-		"title": "title",
-		"categories": categories,
-	})
+	start, limit := getPage(c)
+	postService := service.PostService{}
+	posts, _ := postService.GetPosts(0, start, limit)
+
+	data := getCommonData(c)
+	data["posts"] = posts
+	data["title"] = "首页"
+
+	c.HTML(http.StatusOK, "index/index.html", data)
 }

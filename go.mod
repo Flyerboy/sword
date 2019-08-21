@@ -36,6 +36,7 @@ require (
 	github.com/spf13/viper v1.4.0
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/ugorji/go v1.1.7 // indirect
+	github.com/uniplaces/carbon v0.1.6 // indirect
 	go.etcd.io/bbolt v1.3.3 // indirect
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
 	golang.org/x/mobile v0.0.0-20190806162312-597adff16ade // indirect

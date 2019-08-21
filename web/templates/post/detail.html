@@ -2,32 +2,56 @@
 
 <div class="row">
     <div class="col-sm-9">
-        <div class=" post-detail">
-            <h4>{{ .post.Title }}</h4>
+        <div class="post-detail">
+            <h4>{{ .Post.Title }}</h4>
             <div class="post-attr">
-                <span>阅读数：1</span>
-                <span>评论数：2</span>
-                <span>发布时间：3天前</span>
+                <span>作者：zero</span>
+                <span>阅读数：{{ .Post.ReadNumber }}</span>
+                <span>评论数：{{ .CommentTotal }}</span>
+                <span>发布时间：{{ .Post.CreatedAt }}</span>
+
+                <strong class="float-right">
+                <a href="/update/posts/{{ .Post.Id }}"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;
+                <a href=""><i class="fa fa-trash"></i> 删除</a>
+                </strong>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                <span class="badge badge-warning">Warning</span>
             </div>
             <div class="post-content">
-                {{ .content }}
-                <i class="fa fa-tags"></i></i> <a href="#" class="badge badge-warning">Warning</a>
+                {{ .Content }}
             </div>
         </div>
 
-        <div class="prise bg-danger">赞</div>
+        <div class="prise text-center">
+            <button class="btn btn-info"><i class="fa fa-thumbs-o-up"></i> {{ .Post.PriseNumber }}</button>
+        </div>
 
         <div class="post-comment">
-            <div class="post-comment-title">5条评论</div>
+            <div class="post-comment-title">
+                <span>{{ .CommentTotal }} 条评论</span>
+                <div class="float-right">
+                    <a href="/posts/{{ .Post.Id }}" class="badge badge-info">最新</a>&nbsp;&nbsp;
+                    <a href="/posts/{{ .Post.Id }}?sorts=1" class="badge badge-secondary">热门</a>
+                </div>
+            </div>
+
+            {{ range .Comments }}
             <div class="media post-comment-list">
                 <a class="pr-3" href="#">
                     <img src="/asset/image/1.jpg" alt="Generic placeholder image">
                 </a>
                 <div class="media-body">
-                    <div class="mt-0">Media heading . 4分钟前</div>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                    <div class="media mt-3">
+                    <div class="mt-0">
+                        Media heading . {{ .CreatedAt }}
+                        <div class="float-right post-comment-attr">
+                            <i class="fa fa-thumbs-o-up"> {{ .PriseNumber }}</i> &nbsp;&nbsp;
+                            <i class="fa fa-reply"></i>
+                        </div>
+                    </div>
+                    <div>{{ .Content }}</div>
+                    {{/*<div class="media mt-3">
                         <a class="pr-3" href="#">
                             <img src="/asset/image/1.jpg" alt="Generic placeholder image">
                         </a>
@@ -35,46 +59,40 @@
                             <div class="mt-0">Media heading . 4分钟前</div>
                             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                         </div>
-                    </div>
-
-                    <div class="media mt-3">
-                        <a class="pr-3" href="#">
-                            <img src="/asset/image/1.jpg" alt="Generic placeholder image">
-                        </a>
-                        <div class="media-body">
-                            <div class="mt-0">Media heading . 4分钟前</div>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
+                    </div>*/}}
                 </div>
             </div>
+            {{ end }}
+        </div>
 
-            <div>
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+        <div class="post-create-comment">
+            <form action="/create/comments" method="post">
+                <div class="form-group">
+                    <textarea class="form-control" name="content"></textarea>
+                </div>
+                <input type="hidden" name="post_id" value="{{ .post.Id }}">
+                <button type="submit" class="btn btn-primary">评论</button>
+            </form>
         </div>
     </div>
     <div class="col-sm-3">
-        <div class="card">
-            <img class="card-img-top" src="/asset/image/1.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+        <div class="card user-card">
+            <img src="/asset/image/1.jpg" alt="Card image cap">
+            <div class="card-body  text-center">
+                <h5 class="card-title">
+                    <a href="">Zero</a>
+                </h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">GitHub</a>
+                <a href="#" class="card-link">WebSite</a>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
+        </div>
+
+        <div class="BlogAnchor">
+            <p>
+                <b id="AnchorContentToggle" title="收起" style="cursor:pointer;">目录[-]</b>
+            </p>
+            <div class="AnchorContent" id="AnchorContent"> </div>
         </div>
     </div>
 </div>
@@ -82,5 +100,68 @@
 <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
 <script>
     hljs.initHighlightingOnLoad();
+    $(".post-content").find("h1,h2,h3,h4,h5,h6").each(function(i,item){
+        var tag = $(item).get(0).localName;
+        $(item).attr("id","wow"+i);
+        $("#AnchorContent").append('<li><a class="new'+tag+' anchor-link" onclick="return false;" href="#" link="#wow'+i+'">'+(i+1)+" · "+$(this).text()+'</a></li>');
+        $(".newh2").css("margin-left",0);
+        $(".newh3").css("margin-left",20);
+        $(".newh4").css("margin-left",40);
+        $(".newh5").css("margin-left",60);
+        $(".newh6").css("margin-left",80);
+    });
+    $("#AnchorContentToggle").click(function(){
+        var text = $(this).html();
+        if(text=="目录[-]"){
+            $(this).html("目录[+]");
+            $(this).attr({"title":"展开"});
+        }else{
+            $(this).html("目录[-]");
+            $(this).attr({"title":"收起"});
+        }
+        $("#AnchorContent").toggle();
+    });
+
+    $(".anchor-link").click(function(){
+        $("html,body").animate({scrollTop: $($(this).attr("link")).offset().top}, 1000);
+    });
 </script>
+<style>
+    .BlogAnchor {
+        margin-top: 20px;
+        background: #ffffff;
+        padding: 20px;
+        line-height: 180%;
+    }
+    .BlogAnchor p {
+        font-size: 18px;
+        color: #15a230;
+        margin-bottom: 0.3em;
+    }
+    .BlogAnchor .AnchorContent {
+        padding: 5px 0px;
+    }
+    .BlogAnchor li{
+        font-size: 14px;
+        list-style: none;
+    }
+    #AnchorContentToggle {
+        font-size: 13px;
+        font-weight: normal;
+        color: #FFF;
+        display: inline-block;
+        line-height: 20px;
+        background: #5cc26f;
+        font-style: normal;
+        padding: 1px 8px;
+        margin-right: 10px;
+    }
+    .BlogAnchor a:hover {
+        color: #333333;
+    }
+    .BlogAnchor a {
+        color: #888888;
+        text-decoration: none;
+    }
+</style>
 {{ end }}

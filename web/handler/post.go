@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"discuss/model"
 	"discuss/service"
 	"discuss/web/util"
 	"github.com/gin-gonic/gin"
@@ -9,32 +10,97 @@ import (
 	"strconv"
 )
 
-func GetPosts(c *gin.Context) {
-	//page := c.DefaultQuery("page", "1")
-	//size := c.DefaultQuery("size", "10")
+type PostHandler struct {}
 
-	posts, _ := service.GetPosts(0, 10)
-	categories, _ := service.GetCategories(0, 10)
-	c.HTML(http.StatusOK, "post/index.html", gin.H{
-		"posts": posts,
-		"title": "文章列表",
-		"categories": categories,
-	})
+func (h PostHandler) GetPosts(c *gin.Context) {
+	start, limit := getPage(c)
+
+	categoryId, _ := strconv.Atoi(c.DefaultQuery("category_id", "0"))
+	sorts, _ := strconv.Atoi(c.DefaultQuery("sorts", "1"))
+
+	postService := service.PostService{}
+	posts, _ := postService.GetPosts(categoryId, start, limit)
+
+	data := getCommonData(c)
+	data["Posts"] = posts
+	data["CategoryId"] = categoryId
+	data["Sorts"] = sorts
+	data["Title"] = "文章列表"
+	data["Categories"], _ = service.GetCategories(0, 10)
+	c.HTML(http.StatusOK, "post/index.html", data)
 }
 
-func GetPostsDetail(c *gin.Context) {
+func (h PostHandler) GetPostDetail(c *gin.Context) {
 	id := c.Param("id")
 	postId, _ := strconv.Atoi(id)
-	categories, _ := service.GetCategories(0, 10)
 	postService := service.PostService{}
 	post, _ := postService.GetPostDetail(postId)
 
 	content := util.MarkDown(post.Content)
-	c.HTML(http.StatusOK, "post/detail.html", gin.H{
-		"post": post,
-		"title": "文章详情",
-		"categories": categories,
-		"content": template.HTML(content),
-	})
+
+	data := getCommonData(c)
+	data["Post"] = post
+	data["Title"] = "文章详情"
+	data["Content"] = template.HTML(content)
+
+	commentService := service.CommentService{}
+	data["Comments"], _ = commentService.GetComments(postId, 0, 10)
+	data["CommentTotal"] = commentService.GetTotal(postId)
+
+	c.HTML(http.StatusOK, "post/detail.html", data)
 }
 
+func (h PostHandler) CreatePost(c *gin.Context) {
+	var success, error string
+	if c.Request.Method == "POST" {
+		title := c.PostForm("title")
+		categoryId, _ := strconv.Atoi(c.PostForm("category_id"))
+		content := c.PostForm("content")
+
+		postService := service.PostService{}
+		res := postService.CreatePost(categoryId, title, content)
+		if res {
+			success = "发布成功"
+		} else {
+			error = "发布失败"
+		}
+	}
+
+	data := getCommonData(c)
+	data["Flush"] = FlushData{
+		Success: success,
+		Error: error,
+	}
+	data["Title"] = "创建文章"
+	data["Post"] = model.Post{}
+	data["Categories"], _ = service.GetCategories(0, 10)
+	c.HTML(http.StatusOK, "post/create.html", data)
+}
+
+func (h PostHandler) UpdatePost(c *gin.Context) {
+	var success, error string
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	if c.Request.Method == "POST" {
+		title := c.PostForm("title")
+		content := c.PostForm("content")
+
+		postService := service.PostService{}
+		res := postService.UpdatePost(id, title, content)
+		if res {
+			success = "编辑成功"
+		} else {
+			error = "编辑失败"
+		}
+	}
+
+	data := getCommonData(c)
+	data["Flush"] = FlushData{
+		Success: success,
+		Error: error,
+	}
+	data["Title"] = "编辑文章"
+	data["Post"], _ = model.Post{}.Find(id)
+	data["Categories"], _ = service.GetCategories(0, 10)
+	c.HTML(http.StatusOK, "post/update.html", data)
+}

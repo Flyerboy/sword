@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ .title }}</title>
+    <title>{{ .WebName }} - {{ .Title }}</title>
     <meta charset="utf-8">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -12,26 +12,26 @@
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light my-navbar">
-            <a class="navbar-brand" href="/">Navbar</a>
+            <a class="navbar-brand" href="/">{{ .WebName }}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    {{ range $k, $category := .categories }}
+                    {{ range $k, $menu := .Menus }}
                     <li class="nav-item">
-                        <a class="nav-link" href="/category/{{ $category.Id }}">{{ $category.Title }}</a>
+                        <a class="nav-link" href="{{ $menu.Router }}">{{ $menu.Title }}</a>
                     </li>
                     {{ end }}
                 </ul>
 
                 <ul class="navbar-nav login">
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">登录</a>
+                        <a class="nav-link" href="javascript:;" data-toggle="modal" data-target="#login">登录</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">注册</a>
+                        <a class="nav-link" href="javascript:;" data-toggle="modal" data-target="#login">注册</a>
                     </li>
                 </ul>
             </div>
@@ -39,7 +39,30 @@
     </div>
     <div class="main">
         <div class="container">
+            {{ if ne .Flush.Error "" }}
+                <div class="alert alert-danger" role="alert">{{ .Flush.Error }}</div>
+            {{ end }}
+
+            {{ if ne .Flush.Success "" }}
+                <div class="alert alert-success" role="alert">{{ .Flush.Success }}</div>
+            {{ end }}
             {{ template "content" . }}
+        </div>
+    </div>
+
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">注册&登录</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a class="btn btn-primary btn-block" href="{{ .GitHub }}">GitHub</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>

@@ -14,8 +14,23 @@
     padding-bottom: 20px;
 }
 
+.mb20{
+    margin-bottom: 20px;
+}
+
+/*index*/
+.index-post>h5,
+.index-course>h5,
+.index-special>h5{
+    margin-bottom: 20px;
+}
+
 .post-list{
     margin-bottom: 20px;
+}
+
+.post-list .post-title{
+    color: #666666;
 }
 
 .post-list .post-attr{
@@ -41,6 +56,9 @@
 .post-detail .post-attr span{
     margin-right: 10px;
 }
+.post-detail .post-tags{
+    margin: 15px 0;
+}
 
 .post-comment{
     background-color: #ffffff;
@@ -48,29 +66,56 @@
     margin-top: 20px;
 }
 .post-comment-title{
-    font-size: 22px;
-    font-weight: bold;
     padding: 0 0 15px 0;
     border-bottom: 1px solid #eeeeee;
     margin-bottom: 20px;
+}
+.post-comment-title span{
+    font-size: 22px;
+    font-weight: bold;
+}
+.post-comment-title a{
+    margin-top: 10px;
+    color: #FFFFFF !important;
 }
 .post-comment-list{
     margin-bottom: 20px;
 }
 
+.post-comment-attr i{
+    color: #aaaaaa;
+    cursor: pointer;
+}
+.post-comment-attr i:hover{
+    color: #666666;
+}
+
 .post-comment .media img{
-    width: 64px;
-    height: 64px;
-    border-radius: 32px;
+    width: 55px;
+    height: 55px;
+    border-radius: 30px;
+}
+.post-create-comment{
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #FFFFFF;
 }
 
 .prise{
     margin: 20px auto;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    line-height: 50px;
-    text-align: center;
-    color: #ffffff;
-    cursor: pointer;
+}
+
+.post-form{
+    background-color: #ffffff;
+    padding: 20px;
+}
+.user-card{
+    border: 0;
+    border-radius: 0;
+}
+.user-card img{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin: 20px auto 0;
 }
