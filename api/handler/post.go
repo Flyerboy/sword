@@ -7,11 +7,18 @@ import (
 	"net/http"
 )
 
-func GetPosts(c *gin.Context) {
+var PostHandler = &postHandler{}
+
+type postHandler struct {
+
+}
+
+
+func (p *postHandler) Index(c *gin.Context) {
 	page := c.DefaultQuery("page", "1")
 	size := c.DefaultQuery("size", "10")
 
-	topics, err := service.GetPosts(0, 10)
+	topics, err := service.PostService.Select(0, 0, 10)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -27,11 +34,11 @@ func GetPosts(c *gin.Context) {
 	})
 }
 
-func CreatePost(c *gin.Context) {
+func (p *postHandler) Create(c *gin.Context) {
 	title := c.PostForm("title")
 	content := c.PostForm("content")
 
-	res := service.CreatePost(1, title, content)
+	res := service.PostService.Create(1, title, content)
 
 	fmt.Println(res)
 

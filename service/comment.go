@@ -2,23 +2,25 @@ package service
 
 import "discuss/model"
 
-type CommentService struct {}
+var CommentService = &commentService{}
 
-func (s CommentService) GetComments(postId, start, limit int) (comments []*model.Comment, err error){
+type commentService struct {}
+
+func (s *commentService) Select(postId, start, limit int) (comments []*model.Comment, err error){
 	comments, err = model.Comment{
 		PostId: postId,
 	}.Select(start, limit)
 	return
 }
 
-func (s CommentService) GetTotal(postId int) (total int)  {
+func (s *commentService) Total(postId int) (total int)  {
 	total = model.Comment{
 		PostId: postId,
 	}.Count()
 	return
 }
 
-func (s CommentService) CreateComment(postId, userId int, content string, parentId int) (res bool, err error) {
+func (s *commentService) Create(postId, userId int, content string, parentId int) (res bool, err error) {
 	commentModel := model.Comment{
 		PostId: postId,
 		UserId: userId,

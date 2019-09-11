@@ -2,11 +2,11 @@ package service
 
 import "discuss/model"
 
-var User = &UserService{}
+var UserService = &userService{}
 
-type UserService struct {}
+type userService struct {}
 
-func (s *UserService) GetUserDetail(id int) (user *model.User, err error) {
+func (s *userService) GetUserDetail(id int) (user *model.User, err error) {
 	user, err = (&model.User{}).DetailById(id)
 	return
 }

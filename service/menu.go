@@ -2,9 +2,11 @@ package service
 
 import "discuss/model"
 
-type MenuService struct {}
+var MenuService = &menuService{}
 
-func (s MenuService) GetMenus(start, limit int) (menus []*model.Menu, err error)  {
+type menuService struct {}
+
+func (s *menuService) Select(start, limit int) (menus []*model.Menu, err error)  {
 	menus, err = model.Menu{}.Select(start, limit)
 	return
 }

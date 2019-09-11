@@ -6,10 +6,13 @@ import (
 	"net/http"
 )
 
-func Index(c *gin.Context)  {
+var IndexHandler = &indexHandler{}
+
+type indexHandler struct {}
+
+func (this *indexHandler) Index(c *gin.Context)  {
 	start, limit := getPage(c)
-	postService := service.PostService{}
-	posts, _ := postService.GetPosts(0, start, limit)
+	posts, _ := service.PostService.Select(0, start, limit)
 
 	data := getCommonData(c)
 	data["posts"] = posts

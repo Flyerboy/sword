@@ -10,16 +10,17 @@ import (
 	"strconv"
 )
 
-type PostHandler struct {}
+var PostHandler = &postHandler{}
 
-func (h PostHandler) GetPosts(c *gin.Context) {
+type postHandler struct {}
+
+func (h *postHandler) Index(c *gin.Context) {
 	start, limit := getPage(c)
 
 	categoryId, _ := strconv.Atoi(c.DefaultQuery("category_id", "0"))
 	sorts, _ := strconv.Atoi(c.DefaultQuery("sorts", "1"))
 
-	postService := service.PostService{}
-	posts, _ := postService.GetPosts(categoryId, start, limit)
+	posts, _ := service.PostService.Select(categoryId, start, limit)
 
 	data := getCommonData(c)
 	data["Posts"] = posts
@@ -30,11 +31,10 @@ func (h PostHandler) GetPosts(c *gin.Context) {
 	c.HTML(http.StatusOK, "post/index.html", data)
 }
 
-func (h PostHandler) GetPostDetail(c *gin.Context) {
+func (h *postHandler) Detail(c *gin.Context) {
 	id := c.Param("id")
 	postId, _ := strconv.Atoi(id)
-	postService := service.PostService{}
-	post, _ := postService.GetPostDetail(postId)
+	post, _ := service.PostService.Detail(postId)
 
 	content := util.MarkDown(post.Content)
 
@@ -43,22 +43,20 @@ func (h PostHandler) GetPostDetail(c *gin.Context) {
 	data["Title"] = "文章详情"
 	data["Content"] = template.HTML(content)
 
-	commentService := service.CommentService{}
-	data["Comments"], _ = commentService.GetComments(postId, 0, 10)
-	data["CommentTotal"] = commentService.GetTotal(postId)
+	data["Comments"], _ = service.CommentService.Select(postId, 0, 10)
+	data["CommentTotal"] = service.CommentService.Total(postId)
 
 	c.HTML(http.StatusOK, "post/detail.html", data)
 }
 
-func (h PostHandler) CreatePost(c *gin.Context) {
+func (h *postHandler) Create(c *gin.Context) {
 	var success, error string
 	if c.Request.Method == "POST" {
 		title := c.PostForm("title")
 		categoryId, _ := strconv.Atoi(c.PostForm("category_id"))
 		content := c.PostForm("content")
 
-		postService := service.PostService{}
-		res := postService.CreatePost(categoryId, title, content)
+		res := service.PostService.Create(categoryId, title, content)
 		if res {
 			success = "发布成功"
 		} else {
@@ -77,7 +75,7 @@ func (h PostHandler) CreatePost(c *gin.Context) {
 	c.HTML(http.StatusOK, "post/create.html", data)
 }
 
-func (h PostHandler) UpdatePost(c *gin.Context) {
+func (h *postHandler) Update(c *gin.Context) {
 	var success, error string
 	id, _ := strconv.Atoi(c.Param("id"))
 
@@ -85,8 +83,7 @@ func (h PostHandler) UpdatePost(c *gin.Context) {
 		title := c.PostForm("title")
 		content := c.PostForm("content")
 
-		postService := service.PostService{}
-		res := postService.UpdatePost(id, title, content)
+		res := service.PostService.Update(id, title, content)
 		if res {
 			success = "编辑成功"
 		} else {

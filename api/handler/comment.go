@@ -6,8 +6,14 @@ import (
 	"net/http"
 )
 
-func GetComments(c *gin.Context) {
-	comments, err := service.GetComments(0, 10)
+var CommentHandler = &commentHandler{}
+
+type commentHandler struct {
+
+}
+
+func (this *commentHandler) Index(c *gin.Context) {
+	comments, err := service.CommentService.Select(1, 0, 10)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"msg": "get comments error",
@@ -21,6 +27,6 @@ func GetComments(c *gin.Context) {
 	})
 }
 
-func CreateComment(c *gin.Context) {
+func (this *commentHandler) Create(c *gin.Context) {
 
 }

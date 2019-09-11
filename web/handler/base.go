@@ -16,7 +16,7 @@ type FlushData struct {
 
 func SetCommonData(c *gin.Context) {
 	commonData := CommonData{}
-	commonData["Menus"], _ = service.MenuService{}.GetMenus(0, 10)
+	commonData["Menus"], _ = service.MenuService.Select(0, 10)
 	commonData["WebName"] = viper.Get("web.name")
 	commonData["GitHub"] = "https://github.com/login/oauth/authorize?client_id=7e015d8ce32370079895&redirect_uri=http://localhost:8080/oauth/redirect"
 	commonData["IsLogin"] = false

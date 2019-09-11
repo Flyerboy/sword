@@ -10,12 +10,12 @@ func NewRouter() *gin.Engine {
 	router := gin.New()
 
 	// post
-	router.GET("/posts", handler.GetPosts)
-	router.POST("/posts/create", handler.CreatePost)
+	router.GET("/posts", handler.PostHandler.Index)
+	router.POST("/posts/create", handler.PostHandler.Create)
 
 	// comment
-	router.GET("/comments", handler.GetComments)
-	router.POST("/comments/create", handler.CreateComment)
+	router.GET("/comments", handler.CommentHandler.Index)
+	router.POST("/comments/create", handler.CommentHandler.Create)
 
 	return router
 }

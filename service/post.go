@@ -2,21 +2,23 @@ package service
 
 import "discuss/model"
 
-type PostService struct {}
+var PostService = &postService{}
 
-func (s *PostService) GetPosts(categoryId, start, limit int) (posts []*model.Post, err error){
+type postService struct {}
+
+func (s *postService) Select(categoryId, start, limit int) (posts []*model.Post, err error){
 	posts, err = model.Post{
 		CategoryId: categoryId,
 	}.Select(start, limit)
 	return
 }
 
-func (s *PostService) GetPostDetail(id int) (posts model.Post, err error) {
+func (s *postService) Detail(id int) (posts model.Post, err error) {
 	posts, err = model.Post{}.Find(id)
 	return
 }
 
-func (s *PostService) CreatePost(categoryId int, title, content string) (bool) {
+func (s *postService) Create(categoryId int, title, content string) (bool) {
 	res := model.Post{
 		Title: title,
 		CategoryId: categoryId,
@@ -27,7 +29,7 @@ func (s *PostService) CreatePost(categoryId int, title, content string) (bool) {
 	return res
 }
 
-func (s *PostService) UpdatePost(id int, title, content string) (bool) {
+func (s *postService) Update(id int, title, content string) (bool) {
 	res := model.Post{
 		Id: id,
 		Title: title,

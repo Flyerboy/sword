@@ -16,20 +16,18 @@ func NewRouter() *gin.Engine {
 		"html": html,
 	})
 
-	router.GET("/", handler.Index)
+	router.GET("/", handler.IndexHandler.Index)
 
 	// post
-	postHandler := handler.PostHandler{}
-	router.GET("/posts", postHandler.GetPosts)
-	router.GET("/posts/:id", postHandler.GetPostDetail)
-	router.GET("/create/posts", postHandler.CreatePost)
-	router.POST("/create/posts", postHandler.CreatePost)
-	router.GET("/update/posts/:id", postHandler.UpdatePost)
-	router.POST("/update/posts/:id", postHandler.UpdatePost)
+	router.GET("/posts", handler.PostHandler.Index)
+	router.GET("/posts/:id", handler.PostHandler.Detail)
+	router.GET("/create/posts", handler.PostHandler.Create)
+	router.POST("/create/posts", handler.PostHandler.Create)
+	router.GET("/update/posts/:id", handler.PostHandler.Update)
+	router.POST("/update/posts/:id", handler.PostHandler.Update)
 
 	// comment
-	commentHandler := handler.CommentHandler{}
-	router.POST("/create/comments", commentHandler.CreateComment)
+	router.POST("/create/comments", handler.CommentHandler.Create)
 
 	return router
 }

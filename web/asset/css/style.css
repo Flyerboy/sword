@@ -119,3 +119,13 @@
     border-radius: 40px;
     margin: 20px auto 0;
 }
+
+.footer{
+    background-color: #333333;
+    color: #FFFFFF;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer p{
+    margin-bottom: 0;
+}
