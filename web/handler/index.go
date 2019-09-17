@@ -16,7 +16,7 @@ func (this *indexHandler) Index(c *gin.Context)  {
 
 	data := getCommonData(c)
 	data["posts"] = posts
-	data["title"] = "首页"
+	data["Title"] = "首页"
 
 	c.HTML(http.StatusOK, "index/index.html", data)
 }

@@ -46,7 +46,7 @@
                     <div class="mt-0">
                         Media heading . {{ .CreatedAt }}
                         <div class="float-right post-comment-attr">
-                            <i class="fa fa-thumbs-o-up"> {{ .PriseNumber }}</i> &nbsp;&nbsp;
+                            <i class="fa fa-thumbs-o-up" onclick="prise()"> {{ .PriseNumber }}</i> &nbsp;&nbsp;
                             <i class="fa fa-reply"></i>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <textarea class="form-control" name="content"></textarea>
                 </div>
-                <input type="hidden" name="post_id" value="{{ .post.Id }}">
+                <input type="hidden" name="post_id" value="{{ .Post.Id }}">
                 <button type="submit" class="btn btn-primary">评论</button>
             </form>
         </div>

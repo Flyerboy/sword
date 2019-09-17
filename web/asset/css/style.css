@@ -27,14 +27,31 @@
 
 .post-list{
     margin-bottom: 20px;
+    line-height: 30px;
+}
+.post-list .post-menu{
+    line-height: 40px;
+    background-color: #f8f9fa;
+}
+.post-list .post-menu a{
+    margin-right: 5px;
+}
+.post-list .post-image{
+    width: 35px;
+    margin-right: 10px;
 }
 
 .post-list .post-title{
-    color: #666666;
+    color: #555555;
+}
+.post-list .post-title:hover{
+    color: #333333;
+    text-decoration: none;
 }
 
 .post-list .post-attr{
     color: #aaaaaa;
+    font-size: 14px;
 }
 .post-list .float-left,
 .post-list .float-right{
@@ -101,6 +118,78 @@
     background-color: #FFFFFF;
 }
 
+/* course */
+.course-list .card-title a{
+    color: #555555;
+}
+.course-list .card-title a:hover{
+    text-decoration: none;
+    color: #333333;
+}
+.course-detail{
+    background-color: #FFFFFF;
+    padding: 20px;
+}
+.course-detail .course-introduction{
+    color: #888888;
+    font-size: 14px;
+}
+.course-detail img{
+    width: 300px;
+}
+.course-chapter a{
+    color: #555555;
+    margin-right: 10px;
+}
+.course-chapter a:hover{
+    color: #333333;
+    text-decoration: none;
+}
+.course-chapter .course-chapter-time{
+    color: #aaaaaa;
+    font-size: 14px;
+}
+
+/* book */
+.book-list{
+    background-color: #FFFFFF;
+
+}
+.book-list img{
+    width: 100px;
+}
+.book-list li{
+    border-bottom: 1px solid #eeeeee;
+    padding: 20px;
+}
+.book-list h3 a{
+    color: #333333;
+}
+.book-list .book-introduction{
+    color: #777777;
+    font-size: 14px;
+}
+
+.book-list .book-attr{
+    color: #aaaaaa;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+.book-list .book-attr span{
+    margin-right: 10px;
+}
+
+.book-content{
+    padding: 20px;
+    background-color: #FFFFFF;
+}
+
+.book-content .book-header,
+.book-content .book-footer{
+    height: 90px;
+    background-color: #eeeeee;
+}
+
 .prise{
     margin: 20px auto;
 }
@@ -122,10 +211,11 @@
 
 .footer{
     background-color: #333333;
-    color: #FFFFFF;
+    color: #dddddd;
     padding: 20px 0;
     text-align: center;
 }
 .footer p{
     margin-bottom: 0;
+    line-height: 30px;
 }

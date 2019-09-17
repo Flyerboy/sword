@@ -40,7 +40,7 @@ func (h *postHandler) Detail(c *gin.Context) {
 
 	data := getCommonData(c)
 	data["Post"] = post
-	data["Title"] = "文章详情"
+	data["Title"] = "文章 - " + post.Title
 	data["Content"] = template.HTML(content)
 
 	data["Comments"], _ = service.CommentService.Select(postId, 0, 10)

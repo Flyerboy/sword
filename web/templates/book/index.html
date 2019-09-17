@@ -1,0 +1,23 @@
+{{ define "content" }}
+<div class="row">
+    <div class="col-sm-8">
+        <ul class="list-unstyled book-list">
+            {{ range .Books }}
+            <li class="media">
+                <a href="/books/{{ .Id }}"><img src="{{ .Image }}" class="mr-3" alt="..."></a>
+                <div class="media-body">
+                    <h3 class="mt-0 mb-1"><a href="/books/{{ .Id }}">{{ .Title }}</a></h3>
+                    <p class="book-introduction">{{ .Introduction }}</p>
+                    <p class="book-attr">
+                        <span>共20小节</span>
+                        <span>200人已阅读</span>
+                        <a href="/books/{{ .Id }}" class="btn btn-info btn-sm">立即阅读</a>
+                    </p>
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+{{ end }}

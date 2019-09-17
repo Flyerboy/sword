@@ -35,7 +35,7 @@ func (t Post) Create() bool {
 }
 
 func (p Post) Select(start, limit int) (posts []*Post, err error) {
-	err = db.Select("id,title,content,is_top,is_recommend,read_number,prise_number").
+	err = db.Select("id,user_id,title,content,is_top,is_recommend,read_number,prise_number").
 			Where(&p).
 			Order("is_top desc").
 			Order("id desc").

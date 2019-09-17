@@ -1,0 +1,21 @@
+{{ define "content" }}
+
+<div class="row">
+    {{ range .Courses }}
+    <div class="col-sm-4">
+        <div class="card course-list">
+            <a href="/courses/{{ .Id }}"> <img class="card-img-top" src="{{ .Image }}" alt="{{ .Title }}"></a>
+            <div class="card-body">
+                <h5 class="card-title"><a href="/courses/{{ .Id }}"> {{ .Title }}</a></h5>
+                <div>
+                    <span class="float-left">2012-09-10</span>
+                    <span class="float-right">{{ .Times }}分钟</span>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</div>
+
+{{ end }}

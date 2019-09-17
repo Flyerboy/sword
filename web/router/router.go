@@ -29,6 +29,14 @@ func NewRouter() *gin.Engine {
 	// comment
 	router.POST("/create/comments", handler.CommentHandler.Create)
 
+	// course
+	router.GET("/courses", handler.CourseHandler.Index)
+	router.GET("/courses/:id", handler.CourseHandler.Detail)
+
+	// 图书
+	router.GET("/books", handler.BookHandler.Index)
+	router.GET("/books/:id", handler.BookHandler.Detail)
+
 	return router
 }
 

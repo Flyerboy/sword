@@ -1,0 +1,71 @@
+{{ define "content" }}
+
+<div class="row">
+    <div class="col-sm-8">
+        <ul class="list-unstyled course-detail">
+            <li class="media">
+                <img src="{{ .Course.Image }}" class="mr-3">
+                <div class="media-body">
+                    <h4 class="mt-0 mb-1">{{ .Course.Title }}</h4>
+                    <p class="course-introduction">{{ .Course.Introduction }}</p>
+                </div>
+            </li>
+        </ul>
+
+        <div class="card mb20" id="video"></div>
+
+        <div class="card">
+            <div class="card-header">目录</div>
+            <ul class="list-group list-group-flush course-chapter">
+                {{ $CourseId := .Course.Id }}
+                {{ range .Chapters }}
+                <li class="list-group-item">
+                    <div class="float-left">
+                        <a href="/courses/{{ $CourseId }}?chapter_id={{ .Id }}">{{ .Title }} </a>
+                        {{ if eq .IsCharge 0 }}
+                        <span class="badge badge-success">Free</span>
+                        {{ end }}
+                    </div>
+                    <div class="float-right course-chapter-time">{{ .Times }}分钟</div>
+                    <div class="clearfix"></div>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card user-card mb20">
+            <img src="/asset/image/1.jpg" alt="Card image cap">
+            <div class="card-body  text-center">
+                <h5 class="card-title">
+                    <a href="">Zero</a>
+                </h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">GitHub</a>
+                <a href="#" class="card-link">WebSite</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">推荐课程</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio <span class="badge badge-success">Free</span></li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<link href="https://cdn.bootcss.com/dplayer/1.17.1/DPlayer.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/dplayer/1.17.1/DPlayer.min.js"></script>
+<script>
+var dp = new DPlayer({
+    element: document.getElementById('video'),
+    video: {
+        url: '{{ .Chapter.Url }}',
+        pic: 'dplayer.png'
+    }
+});
+</script>
+{{ end }}

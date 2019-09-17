@@ -20,16 +20,12 @@ func Init()  {
 						viper.Get("database.host"),
 						viper.GetInt("database.port"),
 						viper.Get("database.db"))
-
-	fmt.Println(dsn)
 	db, err = gorm.Open("mysql", dsn)
-
-	//db, err = gorm.Open("mysql", "root:root@/discuss?charset=utf8&parseTime=True&loc=Local")
-
 	if err != nil {
 		panic("db link error")
 	}
 
-	db.AutoMigrate(&Post{}, &Comment{}, &Category{}, &Menu{}, &User{})
+	db.AutoMigrate(&Post{}, &Comment{}, &Category{}, &Menu{}, &User{}, &Course{}, &CourseChapter{},
+		&Book{}, &BookChapter{})
 
 }

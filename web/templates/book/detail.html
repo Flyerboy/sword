@@ -1,0 +1,28 @@
+{{ define "content" }}
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">{{ .Book.Title }}</div>
+            <ul class="list-group list-group-flush">
+                {{ $BookId := .Book.Id }}
+                {{ range .Chapters }}
+                <li class="list-group-item"><a href="/books/{{ $BookId }}?chapter_id={{ .Id }}">{{ .Title }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-8 book-content">
+        <div class="book-header mb20"></div>
+        <div class="mb20">{{ .Chapter.Content }}</div>
+        <div class="mb20">
+            <div class="float-left">上一篇：<a href="">11111</a></div>
+            <div class="float-right">下一篇：<a href="">22222</a></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="book-footer"></div>
+
+    </div>
+</div>
+
+{{ end }}
